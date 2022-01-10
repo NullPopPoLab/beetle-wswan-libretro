@@ -826,16 +826,18 @@ bool retro_load_game(const struct retro_game_info *info)
    const unsigned rot_angle = 0;
 
    struct retro_input_descriptor desc[] = {
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT, "X Cursor Left" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP, "X Cursor Up" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN, "X Cursor Down" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "X Cursor Right" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L, "Y Cursor Left" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R2, "Y Cursor Up" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L2, "Y Cursor Down" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R, "Y Cursor Right" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_A, "A" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_B, "B" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP, "Horizontal X1 / Vertical Y2 (Up)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "Horizontal X2 / Vertical Y3 (Right)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN, "Horizontal X3 / Vertical Y4 (Down)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT, "Horizontal X4 / Vertical Y1 (Left)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R2, "Horizontal Y1 (Up) / Vertical A" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R,  "Horizontal Y2 (Right) / Vertical B" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L,  "Horizontal Y3 (Down)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L2, "Horizontal Y4 (Left)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_Y, "Vertical X1 (Left)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_X, "Vertical X2 (Up)" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_A, "Vertical X3 (Right) / Horizontal A" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_B, "Vertical X4 (Down) / Horizontal B" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "Start" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT, "Rotate screen + active D-Pad" },
 
@@ -927,30 +929,30 @@ static void update_input(void)
 {
    static unsigned map[2][11] = {
       {
-         RETRO_DEVICE_ID_JOYPAD_UP,    /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_RIGHT, /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_DOWN,  /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_LEFT,  /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_R2,    /* Y Cursor UP vertical-layout games */
-         RETRO_DEVICE_ID_JOYPAD_R,     /* Y Cursor RIGHT vertical-layout games */
-         RETRO_DEVICE_ID_JOYPAD_L2,    /* Y Cursor DOWN vertical-layout games */
-         RETRO_DEVICE_ID_JOYPAD_L,     /* Y Cursor LEFT vertical-layout games */
+         RETRO_DEVICE_ID_JOYPAD_UP,    /* X1 (Horizontal Up) */
+         RETRO_DEVICE_ID_JOYPAD_RIGHT, /* X2 (Horizontal Right) */
+         RETRO_DEVICE_ID_JOYPAD_DOWN,  /* X3 (Horizontal Down) */
+         RETRO_DEVICE_ID_JOYPAD_LEFT,  /* X4 (Horizontal Left) */
+         RETRO_DEVICE_ID_JOYPAD_L2,    /* Y1 (Vertical Left) */
+         RETRO_DEVICE_ID_JOYPAD_R2,    /* Y2 (Vertical Up) */
+         RETRO_DEVICE_ID_JOYPAD_R,     /* Y3 (Vertical Right) */
+         RETRO_DEVICE_ID_JOYPAD_L,     /* Y4 (Vertical Down) */
          RETRO_DEVICE_ID_JOYPAD_START,
          RETRO_DEVICE_ID_JOYPAD_A,
          RETRO_DEVICE_ID_JOYPAD_B,
       },
       {
-         RETRO_DEVICE_ID_JOYPAD_Y,     /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_X,     /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_A,     /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_B,     /* X Cursor horizontal-layout games */
-         RETRO_DEVICE_ID_JOYPAD_LEFT,  /* Y Cursor UP vertical-layout games */
-         RETRO_DEVICE_ID_JOYPAD_UP,    /* Y Cursor RIGHT vertical-layout games */
-         RETRO_DEVICE_ID_JOYPAD_RIGHT, /* Y Cursor DOWN vertical-layout games */
-         RETRO_DEVICE_ID_JOYPAD_DOWN,  /* Y Cursor LEFT vertical-layout games */
+         RETRO_DEVICE_ID_JOYPAD_Y,     /* X1 (Horizontal Up) */
+         RETRO_DEVICE_ID_JOYPAD_X,     /* X2 (Horizontal Right) */
+         RETRO_DEVICE_ID_JOYPAD_A,     /* X3 (Horizontal Down) */
+         RETRO_DEVICE_ID_JOYPAD_B,     /* X4 (Horizontal Left) */
+         RETRO_DEVICE_ID_JOYPAD_LEFT,  /* Y1 (Vertical Left) */
+         RETRO_DEVICE_ID_JOYPAD_UP,    /* Y2 (Vertical Up) */
+         RETRO_DEVICE_ID_JOYPAD_RIGHT, /* Y3 (Vertival Right) */
+         RETRO_DEVICE_ID_JOYPAD_DOWN,  /* Y4 (Vertical Down) */
          RETRO_DEVICE_ID_JOYPAD_START,
-         RETRO_DEVICE_ID_JOYPAD_L,
-         RETRO_DEVICE_ID_JOYPAD_R,
+         RETRO_DEVICE_ID_JOYPAD_R2,    /* A */
+         RETRO_DEVICE_ID_JOYPAD_R,     /* B */
       }
    };
    unsigned i;
